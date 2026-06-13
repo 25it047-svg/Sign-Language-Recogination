@@ -1,0 +1,61 @@
+# Sign Language Recognition Using Machine Learning
+
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+# Create Dataset
+data = {
+    "gesture": [
+        "A", "A", "A",
+        "B", "B", "B",
+        "C", "C", "C",
+        "D", "D", "D"
+    ],
+
+    "fingers_up": [
+        1, 1, 1,
+        2, 2, 2,
+        3, 3, 3,
+        4, 4, 4
+    ],
+
+    "thumb_position": [
+        1, 1, 1,
+        0, 0, 0,
+        1, 1, 1,
+        0, 0, 0
+    ]
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+print("Dataset:")
+print(df)
+
+# Input Features
+X = df[["fingers_up", "thumb_position"]]
+
+# Output Labels
+y = df["gesture"]
+
+# Create Model
+model = DecisionTreeClassifier()
+
+# Train Model
+model.fit(X, y)
+
+print("\nModel Trained Successfully!")
+
+# User Input
+fingers = int(input("\nEnter Number of Fingers Raised: "))
+thumb = int(input("Enter Thumb Position (1=Up, 0=Down): "))
+
+# Prediction
+test = [[fingers, thumb]]
+
+prediction = model.predict(test)
+
+print("\nRecognized Sign:", prediction[0])
+
+print("\nSign Language Recognition Project Completed Successfully")
